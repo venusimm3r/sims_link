@@ -1,4 +1,3 @@
-
 from pyrogram import Client, filters
 import re
 import os
@@ -10,7 +9,6 @@ DEST_GROUP = int(os.getenv("DEST_GROUP"))
 
 app = Client("my_bot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 
-# Expressão pra detectar links
 link_pattern = re.compile(r"https?://\S+")
 
 @app.on_message(filters.text & filters.group)
