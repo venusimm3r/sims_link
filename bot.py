@@ -13,11 +13,15 @@ link_pattern = re.compile(r"https?://\S+")
 
 @app.on_message(filters.text & filters.group)
 async def link_filter(client, message):
+    # Ignora mensagens do próprio bot
+    if message.from_user and message.from_user.is_bot:
+        return
+
     if link_pattern.search(message.text):
         try:
             await app.send_message(DEST_GROUP, f"Link detectado:\n{message.text}")
-            await message.delete()  # apaga a mensagem original
+            await message.delete()
         except Exception as e:
-            print("Erro ao apagar a mensagem:", e)
+            print("Erro:", e)
 
 app.run()
